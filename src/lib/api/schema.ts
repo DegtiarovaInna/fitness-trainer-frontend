@@ -11,9 +11,12 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
+        /** Get user by id */
         get: operations["getUser"];
+        /** Update user (admin) */
         put: operations["updateUser"];
         post?: never;
+        /** Delete user */
         delete: operations["deleteUser"];
         options?: never;
         head?: never;
@@ -28,6 +31,7 @@ export interface paths {
             cookie?: never;
         };
         get?: never;
+        /** Change password (admin) */
         put: operations["changePassword"];
         post?: never;
         delete?: never;
@@ -43,7 +47,9 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        get?: never;
+        /** Get current user profile */
+        get: operations["me"];
+        /** Update my profile */
         put: operations["updateMe"];
         post?: never;
         delete?: never;
@@ -60,6 +66,7 @@ export interface paths {
             cookie?: never;
         };
         get?: never;
+        /** Change my password */
         put: operations["changeMyPassword"];
         post?: never;
         delete?: never;
@@ -75,9 +82,12 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
+        /** Get timeslot by id */
         get: operations["getTimeSlot"];
+        /** Update timeslot (admin) */
         put: operations["updateTimeSlot"];
         post?: never;
+        /** Delete timeslot (admin) */
         delete: operations["deleteTimeSlot"];
         options?: never;
         head?: never;
@@ -92,6 +102,7 @@ export interface paths {
             cookie?: never;
         };
         get?: never;
+        /** Assign studio admin (admin) */
         put: operations["assignAdmin"];
         post?: never;
         delete?: never;
@@ -107,9 +118,12 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
+        /** Get studio by id */
         get: operations["getStudio"];
+        /** Update studio (admin) */
         put: operations["updateStudio"];
         post?: never;
+        /** Delete studio (admin) */
         delete: operations["deleteStudio"];
         options?: never;
         head?: never;
@@ -123,7 +137,9 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
+        /** Get booking by id */
         get: operations["getBooking"];
+        /** Update booking (admin) */
         put: operations["updateBooking"];
         post?: never;
         delete?: never;
@@ -140,6 +156,7 @@ export interface paths {
             cookie?: never;
         };
         get?: never;
+        /** Cancel booking */
         put: operations["cancelBooking"];
         post?: never;
         delete?: never;
@@ -157,6 +174,10 @@ export interface paths {
         };
         get?: never;
         put?: never;
+        /**
+         * Reset password by token
+         * @description Verifies reset token and updates password.
+         */
         post: operations["resetPassword"];
         delete?: never;
         options?: never;
@@ -173,6 +194,10 @@ export interface paths {
         };
         get?: never;
         put?: never;
+        /**
+         * Request password reset
+         * @description Sends password reset link/token to the email.
+         */
         post: operations["requestReset"];
         delete?: never;
         options?: never;
@@ -189,6 +214,10 @@ export interface paths {
         };
         get?: never;
         put?: never;
+        /**
+         * Resend confirmation email
+         * @description Sends a new confirmation email to the provided address.
+         */
         post: operations["resendConfirmation"];
         delete?: never;
         options?: never;
@@ -205,6 +234,10 @@ export interface paths {
         };
         get?: never;
         put?: never;
+        /**
+         * Register new user
+         * @description Creates a user and sends a confirmation email (in prod).
+         */
         post: operations["registerUser"];
         delete?: never;
         options?: never;
@@ -221,6 +254,7 @@ export interface paths {
         };
         get?: never;
         put?: never;
+        /** Refresh tokens via HttpOnly cookie */
         post: operations["refresh"];
         delete?: never;
         options?: never;
@@ -237,6 +271,10 @@ export interface paths {
         };
         get?: never;
         put?: never;
+        /**
+         * Login
+         * @description Returns accessToken in body and sets refreshToken in HttpOnly cookie
+         */
         post: operations["login"];
         delete?: never;
         options?: never;
@@ -251,8 +289,10 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
+        /** List all timeslots (admin) */
         get: operations["getAllTimeSlots"];
         put?: never;
+        /** Create timeslot (admin) */
         post: operations["createTimeSlot"];
         delete?: never;
         options?: never;
@@ -267,8 +307,10 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
+        /** List studios */
         get: operations["getAllStudios"];
         put?: never;
+        /** Create studio (admin) */
         post: operations["createStudio"];
         delete?: never;
         options?: never;
@@ -283,8 +325,13 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
+        /** Search payments (admin) */
         get: operations["search"];
         put?: never;
+        /**
+         * Create payment intent
+         * @description Returns client secret and payment meta.
+         */
         post: operations["create"];
         delete?: never;
         options?: never;
@@ -301,6 +348,7 @@ export interface paths {
         };
         get?: never;
         put?: never;
+        /** Refund payment (admin) */
         post: operations["refund"];
         delete?: never;
         options?: never;
@@ -317,6 +365,10 @@ export interface paths {
         };
         get?: never;
         put?: never;
+        /**
+         * Stripe webhook
+         * @description Receives Stripe events.
+         */
         post: operations["webhook"];
         delete?: never;
         options?: never;
@@ -333,6 +385,7 @@ export interface paths {
         };
         get?: never;
         put?: never;
+        /** Create pre-signed PUT URL to upload file */
         post: operations["getUploadUrl"];
         delete?: never;
         options?: never;
@@ -347,8 +400,10 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
+        /** List all bookings (admin) */
         get: operations["getAllBookings"];
         put?: never;
+        /** Create booking for specific user (admin) */
         post: operations["createBookingForUser"];
         delete?: never;
         options?: never;
@@ -365,6 +420,7 @@ export interface paths {
         };
         get?: never;
         put?: never;
+        /** Create own booking (current user) */
         post: operations["createOwnBooking"];
         delete?: never;
         options?: never;
@@ -379,6 +435,10 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
+        /**
+         * Check reset token
+         * @description Validates password reset token.
+         */
         get: operations["checkResetToken"];
         put?: never;
         post?: never;
@@ -395,6 +455,10 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
+        /**
+         * Confirm email
+         * @description Confirms email by token.
+         */
         get: operations["confirmEmail"];
         put?: never;
         post?: never;
@@ -411,6 +475,7 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
+        /** List users (admin) */
         get: operations["getAllUsers"];
         put?: never;
         post?: never;
@@ -427,6 +492,7 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
+        /** List timeslots by studio (trainer/admin) */
         get: operations["getTimeSlotsByStudio"];
         put?: never;
         post?: never;
@@ -443,6 +509,7 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
+        /** Timeslots by studio and date range (trainer/admin) */
         get: operations["getTimeSlotsByStudioAndDateRange"];
         put?: never;
         post?: never;
@@ -459,6 +526,7 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
+        /** Available slots by studio within date range */
         get: operations["getAvailableSlots"];
         put?: never;
         post?: never;
@@ -475,6 +543,7 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
+        /** Unique clients count (admin) */
         get: operations["getUniqueClients"];
         put?: never;
         post?: never;
@@ -491,6 +560,7 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
+        /** Occupancy by day (trainer/admin) */
         get: operations["getOccupancy"];
         put?: never;
         post?: never;
@@ -507,6 +577,7 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
+        /** List unique clients by studio (trainer/admin) */
         get: operations["getUniqueClientsByStudio"];
         put?: never;
         post?: never;
@@ -523,6 +594,7 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
+        /** Get payment by id (admin) */
         get: operations["get"];
         put?: never;
         post?: never;
@@ -539,6 +611,7 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
+        /** Create pre-signed GET URL to download file */
         get: operations["getDownloadUrl"];
         put?: never;
         post?: never;
@@ -555,6 +628,10 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
+        /**
+         * Search bookings
+         * @description Filter by user, studio, status and date range.
+         */
         get: operations["searchBookings"];
         put?: never;
         post?: never;
@@ -571,6 +648,7 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
+        /** My upcoming bookings */
         get: operations["getMyUpcoming"];
         put?: never;
         post?: never;
@@ -587,6 +665,7 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
+        /** My booking history */
         get: operations["getMyHistory"];
         put?: never;
         post?: never;
@@ -830,21 +909,21 @@ export interface components {
             timeSlotId: number;
             promoCode?: string;
         };
-        PagePaymentDTO: {
+        Page: {
+            /** Format: int32 */
+            totalPages?: number;
             /** Format: int64 */
             totalElements?: number;
             /** Format: int32 */
-            totalPages?: number;
-            /** Format: int32 */
             size?: number;
-            content?: components["schemas"]["PaymentDTO"][];
+            content?: Record<string, never>[];
             /** Format: int32 */
             number?: number;
             sort?: components["schemas"]["SortObject"];
-            first?: boolean;
-            last?: boolean;
             /** Format: int32 */
             numberOfElements?: number;
+            first?: boolean;
+            last?: boolean;
             pageable?: components["schemas"]["PageableObject"];
             empty?: boolean;
         };
@@ -856,8 +935,8 @@ export interface components {
             pageNumber?: number;
             /** Format: int32 */
             pageSize?: number;
-            paged?: boolean;
             unpaged?: boolean;
+            paged?: boolean;
         };
         SortObject: {
             empty?: boolean;
@@ -884,7 +963,7 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description OK */
+            /** @description Found */
             200: {
                 headers: {
                     [name: string]: unknown;
@@ -892,6 +971,13 @@ export interface operations {
                 content: {
                     "*/*": components["schemas"]["UserDTO"];
                 };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
             };
         };
     };
@@ -910,7 +996,7 @@ export interface operations {
             };
         };
         responses: {
-            /** @description OK */
+            /** @description Updated */
             200: {
                 headers: {
                     [name: string]: unknown;
@@ -932,8 +1018,8 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description OK */
-            200: {
+            /** @description Deleted */
+            204: {
                 headers: {
                     [name: string]: unknown;
                 };
@@ -956,12 +1042,32 @@ export interface operations {
             };
         };
         responses: {
+            /** @description Password updated */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    me: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
             /** @description OK */
             200: {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "*/*": components["schemas"]["UserDTO"];
+                };
             };
         };
     };
@@ -978,7 +1084,7 @@ export interface operations {
             };
         };
         responses: {
-            /** @description OK */
+            /** @description Updated */
             200: {
                 headers: {
                     [name: string]: unknown;
@@ -1002,8 +1108,8 @@ export interface operations {
             };
         };
         responses: {
-            /** @description OK */
-            200: {
+            /** @description Password updated */
+            204: {
                 headers: {
                     [name: string]: unknown;
                 };
@@ -1022,7 +1128,7 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description OK */
+            /** @description Found */
             200: {
                 headers: {
                     [name: string]: unknown;
@@ -1030,6 +1136,13 @@ export interface operations {
                 content: {
                     "*/*": components["schemas"]["TimeSlotDTO"];
                 };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
             };
         };
     };
@@ -1048,7 +1161,7 @@ export interface operations {
             };
         };
         responses: {
-            /** @description OK */
+            /** @description Updated */
             200: {
                 headers: {
                     [name: string]: unknown;
@@ -1070,8 +1183,8 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description OK */
-            200: {
+            /** @description Deleted */
+            204: {
                 headers: {
                     [name: string]: unknown;
                 };
@@ -1091,7 +1204,7 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description OK */
+            /** @description Updated */
             200: {
                 headers: {
                     [name: string]: unknown;
@@ -1113,7 +1226,7 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description OK */
+            /** @description Found */
             200: {
                 headers: {
                     [name: string]: unknown;
@@ -1121,6 +1234,13 @@ export interface operations {
                 content: {
                     "*/*": components["schemas"]["StudioDTO"];
                 };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
             };
         };
     };
@@ -1139,7 +1259,7 @@ export interface operations {
             };
         };
         responses: {
-            /** @description OK */
+            /** @description Updated */
             200: {
                 headers: {
                     [name: string]: unknown;
@@ -1161,8 +1281,8 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description OK */
-            200: {
+            /** @description Deleted */
+            204: {
                 headers: {
                     [name: string]: unknown;
                 };
@@ -1181,7 +1301,7 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description OK */
+            /** @description Found */
             200: {
                 headers: {
                     [name: string]: unknown;
@@ -1189,6 +1309,13 @@ export interface operations {
                 content: {
                     "*/*": components["schemas"]["BookingDTO"];
                 };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
             };
         };
     };
@@ -1207,7 +1334,7 @@ export interface operations {
             };
         };
         responses: {
-            /** @description OK */
+            /** @description Updated */
             200: {
                 headers: {
                     [name: string]: unknown;
@@ -1229,7 +1356,7 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description OK */
+            /** @description Cancelled */
             200: {
                 headers: {
                     [name: string]: unknown;
@@ -1237,6 +1364,13 @@ export interface operations {
                 content: {
                     "*/*": components["schemas"]["BookingDTO"];
                 };
+            };
+            /** @description Business rule violation */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
             };
         };
     };
@@ -1252,8 +1386,8 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description OK */
-            200: {
+            /** @description Password updated */
+            204: {
                 headers: {
                     [name: string]: unknown;
                 };
@@ -1272,8 +1406,8 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description OK */
-            200: {
+            /** @description Sent */
+            204: {
                 headers: {
                     [name: string]: unknown;
                 };
@@ -1292,8 +1426,8 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description OK */
-            200: {
+            /** @description Sent */
+            204: {
                 headers: {
                     [name: string]: unknown;
                 };
@@ -1314,7 +1448,7 @@ export interface operations {
             };
         };
         responses: {
-            /** @description OK */
+            /** @description User created */
             200: {
                 headers: {
                     [name: string]: unknown;
@@ -1323,25 +1457,43 @@ export interface operations {
                     "*/*": components["schemas"]["UserDTO"];
                 };
             };
+            /** @description Validation or business error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Email already exists */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
         };
     };
     refresh: {
         parameters: {
-            query: {
-                refreshToken: string;
-            };
+            query?: never;
             header?: never;
             path?: never;
-            cookie?: never;
+            cookie?: {
+                refreshToken?: string;
+            };
         };
         requestBody?: never;
         responses: {
-            /** @description OK */
+            /** @description Tokens updated, access in body, refresh in Set-Cookie */
             200: {
                 headers: {
                     [name: string]: unknown;
                 };
                 content: {
+                    /** @example {
+                     *       "accessToken": "<NEW_JWT>",
+                     *       "refreshToken": null
+                     *     } */
                     "*/*": components["schemas"]["AuthResponse"];
                 };
             };
@@ -1359,12 +1511,16 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description OK */
+            /** @description Successful authorization */
             200: {
                 headers: {
                     [name: string]: unknown;
                 };
                 content: {
+                    /** @example {
+                     *       "accessToken": "<JWT>",
+                     *       "refreshToken": null
+                     *     } */
                     "*/*": components["schemas"]["AuthResponse"];
                 };
             };
@@ -1403,7 +1559,7 @@ export interface operations {
             };
         };
         responses: {
-            /** @description OK */
+            /** @description Created */
             200: {
                 headers: {
                     [name: string]: unknown;
@@ -1447,7 +1603,7 @@ export interface operations {
             };
         };
         responses: {
-            /** @description OK */
+            /** @description Created */
             200: {
                 headers: {
                     [name: string]: unknown;
@@ -1485,7 +1641,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "*/*": components["schemas"]["PagePaymentDTO"];
+                    "*/*": components["schemas"]["Page"];
                 };
             };
         };
@@ -1503,7 +1659,7 @@ export interface operations {
             };
         };
         responses: {
-            /** @description OK */
+            /** @description Created */
             200: {
                 headers: {
                     [name: string]: unknown;
@@ -1527,7 +1683,7 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description OK */
+            /** @description Refunded */
             200: {
                 headers: {
                     [name: string]: unknown;
@@ -1551,7 +1707,7 @@ export interface operations {
             };
         };
         responses: {
-            /** @description OK */
+            /** @description Accepted (processed) */
             200: {
                 headers: {
                     [name: string]: unknown;
@@ -1577,9 +1733,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "*/*": {
-                        [key: string]: string;
-                    };
+                    "*/*": string;
                 };
             };
         };
@@ -1617,7 +1771,7 @@ export interface operations {
             };
         };
         responses: {
-            /** @description OK */
+            /** @description Created */
             200: {
                 headers: {
                     [name: string]: unknown;
@@ -1641,7 +1795,7 @@ export interface operations {
             };
         };
         responses: {
-            /** @description OK */
+            /** @description Created booking */
             200: {
                 headers: {
                     [name: string]: unknown;
@@ -1663,8 +1817,15 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description OK */
+            /** @description Token is valid */
             200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Invalid token */
+            400: {
                 headers: {
                     [name: string]: unknown;
                 };
@@ -1683,7 +1844,7 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description OK */
+            /** @description Email confirmed */
             200: {
                 headers: {
                     [name: string]: unknown;
@@ -1691,6 +1852,13 @@ export interface operations {
                 content: {
                     "*/*": string;
                 };
+            };
+            /** @description Invalid token */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
             };
         };
     };
@@ -1779,7 +1947,7 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description OK */
+            /** @description List of available slots */
             200: {
                 headers: {
                     [name: string]: unknown;
@@ -1879,7 +2047,7 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description OK */
+            /** @description Found */
             200: {
                 headers: {
                     [name: string]: unknown;
@@ -1887,6 +2055,13 @@ export interface operations {
                 content: {
                     "*/*": components["schemas"]["PaymentDTO"];
                 };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
             };
         };
     };
@@ -1907,9 +2082,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "*/*": {
-                        [key: string]: string;
-                    };
+                    "*/*": string;
                 };
             };
         };

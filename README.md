@@ -1,36 +1,58 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+🧘‍♀️ Fitness Trainer — Frontend (Next.js 15)
 
-## Getting Started
+Localized frontend (ru/uk/de) for a personal fitness trainer booking service with Stripe payments.
+Backend: Spring Boot + PostgreSQL. API docs live on the backend; the frontend generates TypeScript types from the backend’s OpenAPI JSON.
 
-First, run the development server:
+🚀 Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+✅ App Router (Next.js 15) + React 19
+✅ i18n routing with required locale prefix (/ru, /uk, /de) and redirect /ua → /uk
+✅ Auth flow:
+POST /auth/login?email&password → accessToken in JSON body, refreshToken in HttpOnly cookie
+POST /auth/refresh → silent refresh via cookie (frontend sends credentials: "include")
+✅ Pages: Home / About / Services / Blog (localized statics)
+✅ Booking: studio → available time slots → Stripe Payment Element (WIP)
+✅ Profile: upcoming & history (WIP)
+✅ Admin: Users / Bookings / Studios / basic analytics (WIP)
+✅ OpenAPI → TypeScript types with openapi-typescript
+✅ Tailwind CSS v4 styling
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+🧰 Tech Stack
+Layer	Technology
+Framework	Next.js 15 (App Router)
+Language	TypeScript, React 19
+Styles	Tailwind CSS v4
+i18n	next-intl
+Payments	Stripe @stripe/react-stripe-js
+API Types	openapi-typescript
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+📦 Getting Started (local)
+Prereq: Node.js 18+ (или LTS, совместимый с Next 15), pnpm/yarn/npm — на ваш выбор.
+1) Run the backend
+Fill backend .env (DB, JWT, Stripe, SendGrid, S3).
+In backend application.properties make sure you have:
+springdoc.api-docs.path=/v1/api-docs
+springdoc.swagger-ui.path=/swagger-ui.html
+Start Spring Boot at http://localhost:8080.
+Health checks:
+Swagger UI → http://localhost:8080/swagger-ui.html
+OpenAPI JSON → http://localhost:8080/v1/api-docs
+2) Set up the frontend
+# from the frontend folder
+pnpm install            # or npm/yarn
+cp .env.example .env.local
+Edit .env.local (пример):
+# API base URL (backend)
+NEXT_PUBLIC_API_BASE=http://localhost:8080
+# Stripe publishable key (for Payment Element)
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_...
+# Default locale (one of: ru|uk|de)
+NEXT_PUBLIC_DEFAULT_LOCALE=de
+# Optional branding
+NEXT_PUBLIC_OG_IMAGE=/og.jpg
+3) Generate API types from OpenAPI 
+pnpm openapi
+4) Run
+   pnpm dev       # next dev
+# pnpm build && pnpm start  # production build

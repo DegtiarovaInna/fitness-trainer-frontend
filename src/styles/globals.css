@@ -1,0 +1,22 @@
+/* src/styles/globals.css */
+
+/* Tailwind v4 */
+@import "tailwindcss";
+
+
+@theme {
+  --color-brand: #2563eb;       /* синий (blue-600) */
+  --color-brand-dark: #1d4ed8;  /* синий потемнее (blue-700) */
+  --color-accent: #f97316;      /* оранжевый (orange-500) */
+  --color-success: #16a34a;     /* зелёный (green-600) */
+}
+
+
+@layer components {
+  .btn-primary {
+    @apply bg-accent text-white font-semibold px-4 py-2 rounded-md hover:brightness-110;
+  }
+  .btn-success {
+    @apply bg-success text-white font-semibold px-4 py-2 rounded-md;
+  }
+}

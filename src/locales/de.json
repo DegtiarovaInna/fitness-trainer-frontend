@@ -1,0 +1,57 @@
+{
+  "menu": {
+    "home": "Startseite",
+    "about": "Über mich",
+    "services": "Leistungen",
+    "book": "Anmelden",
+    "blog": "Blog"
+  },
+  "cta": { "book": "Anmelden" },
+
+  "home": {
+    "title": "Willkommen!",
+    "subtitle": "Die besten Online- und Offline-Workouts.",
+    "cta": "Kostenlos testen"
+  },
+
+  "auth": {
+    "login": "Anmelden",
+    "register": "Registrieren",
+    "email": "E-Mail",
+    "password": "Passwort",
+    "name": "Name",
+    "phone": "Telefon",
+    "noAccount": "Sie haben noch kein Konto?",
+    "haveAccount": "Sie haben bereits ein Konto?",
+    "errors": { "unknown": "Etwas ist schiefgelaufen." }
+  },
+
+  "register": {
+    "title": "Registrieren",
+    "submit": "Konto erstellen",
+    "successTitle": "Fast fertig!",
+    "successText": "Wir haben Ihnen eine Bestätigungs-E-Mail gesendet. Bitte melden Sie sich nach der Bestätigung an.",
+    "toLogin": "Weiter zur Anmeldung."
+  },
+
+  "about": {
+    "title": "Über mich",
+    "p1": "Ich bin zertifizierte Trainerin mit über 7 Jahren Erfahrung.",
+    "p2": "Ich arbeite online und offline. Individuelle Pläne und Betreuung."
+  },
+
+  "services": {
+    "title": "Leistungen",
+    "cards": {
+      "offline": { "title": "Präsenztraining", "desc": "Fitnessstudio/Studio, persönlich." },
+      "online": { "title": "Online-Sitzungen", "desc": "Zoom/Meet, flexibler Zeitplan." },
+      "coach": { "title": "Coaching", "desc": "Ernährung, Plan, Kontrolle." }
+    },
+    "cta": "Anmelden"
+  },
+
+  "blog": {
+    "title": "Blog",
+    "soon": "Artikel folgen in Kürze."
+  }
+}
