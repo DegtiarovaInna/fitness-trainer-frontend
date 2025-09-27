@@ -1,29 +1,44 @@
-// src/app/[locale]/register/page.tsx
+// src/app/[locale]/auth/register/page.tsx
+export { metadata } from "./metadata";
 "use client";
 
 import { useState, FormEvent } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import { useRouter } from "next/navigation";
 import { register as apiRegister } from "@/lib/api/auth";
+import { useAuthStore } from "@/stores/auth";
 
 export default function RegisterPage() {
   const t = useTranslations("register");
   const ta = useTranslations("auth");
-  const locale = useLocale();
+  const locale = useLocale() as "ru" | "uk" | "de";
   const router = useRouter();
+  const setAccessToken = useAuthStore(s => s.setAccessToken);
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhone] = useState("");
   const [password, setPassword] = useState("");
+  const [confirm, setConfirm] = useState("");
   const [done, setDone] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   async function onSubmit(e: FormEvent) {
     e.preventDefault();
     setError(null);
+
+    if (password !== confirm) {
+      setError(t("errors.passwordsMismatch"));
+      return;
+    }
+
     try {
+      // регистрация
       await apiRegister({ name, email, password, phoneNumber });
+
+      // в режиме FAKE можно сразу «авторизовать»
+      setAccessToken("fake-token");
+
       setDone(true);
     } catch (e: any) {
       setError(e?.message || "Error");
@@ -84,6 +99,17 @@ export default function RegisterPage() {
             className="w-full border px-3 py-2 rounded"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            required
+            minLength={8}
+          />
+        </div>
+        <div>
+          <label className="block mb-1">{t("confirmPassword")}</label>
+          <input
+            type="password"
+            className="w-full border px-3 py-2 rounded"
+            value={confirm}
+            onChange={(e) => setConfirm(e.target.value)}
             required
             minLength={8}
           />

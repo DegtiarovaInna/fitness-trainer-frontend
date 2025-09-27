@@ -1,11 +1,14 @@
 import { api } from "./base";
 import type { operations } from "./schema";
 
-
-export type BookingDTO = operations["getBooking"]["responses"][200]["content"]["*/*"];
-export type BookingCreateForUser = operations["createBookingForUser"]["requestBody"]["content"]["application/json"];
-export type BookingCreateOwn = operations["createOwnBooking"]["requestBody"]["content"]["application/json"];
-export type BookingUpdate = operations["updateBooking"]["requestBody"]["content"]["application/json"];
+export type BookingDTO =
+  operations["getBooking"]["responses"][200]["content"]["*/*"];
+export type BookingCreateForUser =
+  operations["createBookingForUser"]["requestBody"]["content"]["application/json"];
+export type BookingCreateOwn =
+  operations["createOwnBooking"]["requestBody"]["content"]["application/json"];
+export type BookingUpdate =
+  operations["updateBooking"]["requestBody"]["content"]["application/json"];
 
 
 export function getAllBookings(): Promise<BookingDTO[]> {
@@ -28,9 +31,11 @@ export function createOwnBooking(data: BookingCreateOwn): Promise<BookingDTO> {
   });
 }
 
-export function getBooking(id: number): Promise<BookingDTO> {
-  return api<BookingDTO>(`/api/bookings/${id}`, { method: "GET" });
+
+export function getBookingById(id: number): Promise<BookingDTO> {
+  return getBooking(id);
 }
+
 
 export function updateBooking(id: number, data: BookingUpdate): Promise<BookingDTO> {
   return api<BookingDTO>(`/api/bookings/${id}`, {
@@ -39,14 +44,15 @@ export function updateBooking(id: number, data: BookingUpdate): Promise<BookingD
   });
 }
 
+
 export function cancelBooking(id: number): Promise<BookingDTO> {
   return api<BookingDTO>(`/api/bookings/${id}/cancel`, { method: "PUT" });
 }
 
+
 export function getMyUpcoming(): Promise<BookingDTO[]> {
   return api<BookingDTO[]>(`/api/bookings/me/upcoming`, { method: "GET" });
 }
-
 
 export function getMyHistory(): Promise<BookingDTO[]> {
   return api<BookingDTO[]>(`/api/bookings/me/history`, { method: "GET" });

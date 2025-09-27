@@ -1,156 +1,126 @@
 // src/app/[locale]/book/ui/BookingClient.tsx
 "use client";
+import { useEffect, useState } from "react";
+import { useTranslations, useLocale } from "next-intl";
+import { useRouter, useSearchParams } from "next/navigation";
 
-import { useEffect, useMemo, useState } from "react";
-import { useRouter } from "next/navigation";
-import { getAvailableByStudio } from "@/lib/api/timeslots";
-import { createOwnBooking } from "@/lib/api/bookings";
-import { createPayment } from "@/lib/api/payments";
-import { useAuthStore } from "@/stores/auth";
-import StripeProvider from "@/components/StripeProvider";
-import PaymentPanel from "./PaymentPanel";
+import StudioPicker from "@/src/components/booking/StudioPicker";
+import DateRange from "@/src/components/booking/DateRange";
+import AvailableSlots from "@/src/components/booking/AvailableSlots";
+import PaymentSheet from "@/src/components/booking/PaymentSheet";
 
-type Studio = { id?: number; name: string; address: string };
+import { createOwnBooking } from "@/src/lib/api/bookings";
+import { createPayment } from "@/src/lib/api/payments";
+import type { TimeSlotDTO } from "@/src/lib/api/timeslots";
+import { useAuthStore } from "@/src/stores/auth";
 
-export default function BookingClient({
-  locale,
-  studios,
-  tTitle
-}: {
-  locale: "ru" | "uk" | "de";
-  studios: Studio[];
-  tTitle: string;
-}) {
+export default function BookingClient() {
+  const t = useTranslations();
+  const locale = useLocale() as "ru" | "uk" | "de";
   const router = useRouter();
+  const sp = useSearchParams();
+
   const accessToken = useAuthStore((s) => s.accessToken);
 
-  const [studioId, setStudioId] = useState<number | null>(studios[0]?.id ?? null);
-  const [range, setRange] = useState<[string, string]>(() => {
-    const d = new Date();
-    const start = d.toISOString().slice(0, 10);
-    d.setDate(d.getDate() + 14);
-    const end = d.toISOString().slice(0, 10);
-    return [start, end];
+  const [studioId, setStudioId] = useState<number | null>(null);
+  const [range, setRange] = useState(() => {
+    const today = new Date();
+    const start = today.toISOString().slice(0, 10);
+    const endDate = new Date(today);
+    endDate.setDate(endDate.getDate() + 7);
+    const end = endDate.toISOString().slice(0, 10);
+    return { start, end };
   });
-  const [loading, setLoading] = useState(false);
-  const [slots, setSlots] = useState<any[]>([]);
+
   const [clientSecret, setClientSecret] = useState<string | null>(null);
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [info, setInfo] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!studioId) return;
-    setLoading(true);
-    getAvailableByStudio(studioId, range[0], range[1])
-      .then((list) => {
-        const norm = list.map((s: any) => ({
-          ...s,
-          startText: toHm(s.startTime),
-          endText: toHm(s.endTime)
-        }));
-        setSlots(norm);
-      })
-      .finally(() => setLoading(false));
-  }, [studioId, range]);
+    const justLoggedIn = sp.get("loggedIn") === "1";
+    if (justLoggedIn) setInfo(t("auth.login") + " ✓");
+  }, [sp, t]);
 
-  function toHm(t: any) {
-    if (!t) return "";
-    if (typeof t === "string") return t.slice(0, 5); // "14:30"
-    if (typeof t === "object" && typeof t.hour === "number")
-      return `${String(t.hour).padStart(2, "0")}:${String(t.minute ?? 0).padStart(2, "0")}`;
-    return "";
-    }
+  async function handlePickSlot(slot: TimeSlotDTO) {
+    setError(null);
+    setInfo(null);
 
-  async function book(slotId: number) {
     if (!accessToken) {
-      router.push(`/${locale}/auth/login?returnTo=/${locale}/book`);
+      const returnTo = `/${locale}/book`;
+      router.push(`/${locale}/auth/login?returnTo=${encodeURIComponent(returnTo)}`);
       return;
     }
-    setLoading(true);
+
     try {
-
-      const booking = await createOwnBooking({ timeSlotId: slotId });
-
+      setBusy(true);
+      const booking = await createOwnBooking({ timeSlotId: slot.id! });
       const payment = await createPayment({ bookingId: booking.id! });
-      if (payment.clientSecret) {
-        setClientSecret(payment.clientSecret);
-      } else {
-        alert("Не удалось получить clientSecret для оплаты.");
-      }
+      if (!payment.clientSecret) throw new Error(t("payments.failed"));
+      setClientSecret(payment.clientSecret);
+    } catch (e: any) {
+      setError(e?.message || t("payments.failed"));
     } finally {
-      setLoading(false);
+      setBusy(false);
     }
   }
 
-  function closePayment() {
+  function handlePaymentSuccess() {
     setClientSecret(null);
-  }
-
-  function onPaid() {
-    setClientSecret(null);
-
-    router.replace(`/${locale}/profile`);
+    setInfo(t("booking.paymentSucceeded"));
+    router.push(`/${locale}/profile?tab=upcoming`);
   }
 
   return (
-    <section className="max-w-4xl mx-auto py-12 px-4">
-      <h1 className="text-3xl font-bold mb-6">{tTitle}</h1>
+    <div className="max-w-3xl mx-auto p-4 space-y-6">
+      <h1 className="text-2xl font-bold">{t("booking.title")}</h1>
 
-      <div className="flex flex-col gap-3 mb-6">
-        <select
-          className="border rounded px-3 py-2"
-          value={studioId ?? ""}
-          onChange={(e) => setStudioId(Number(e.target.value))}
-        >
-          {studios.map((s) => (
-            <option key={s.id} value={s.id}>
-              {s.name} — {s.address}
-            </option>
-          ))}
-        </select>
+      {info && <div className="rounded-md bg-green-50 border border-green-200 p-3 text-green-800">{info}</div>}
+      {error && <div className="rounded-md bg-red-50 border border-red-200 p-3 text-red-800">{error}</div>}
 
-        <div className="flex gap-3">
-          <input
-            type="date"
-            className="border rounded px-3 py-2"
-            value={range[0]}
-            onChange={(e) => setRange([e.target.value, range[1]])}
-          />
-          <input
-            type="date"
-            className="border rounded px-3 py-2"
-            value={range[1]}
-            onChange={(e) => setRange([range[0], e.target.value])}
-          />
-        </div>
-      </div>
+      <section className="space-y-3">
+        <label className="block text-sm font-medium">{t("booking.studio")}</label>
+        <StudioPicker value={studioId} onChange={setStudioId} />
+      </section>
 
-      {loading ? (
-        <p className="animate-pulse text-gray-500">Загружаем доступные слоты…</p>
-      ) : slots.length === 0 ? (
-        <p className="text-gray-600">Нет доступных слотов на выбранный период.</p>
-      ) : (
-        <ul className="grid gap-3 sm:grid-cols-2">
-          {slots.map((s) => (
-            <li key={s.id} className="rounded-2xl shadow p-4 bg-white flex items-center justify-between">
-              <div>
-                <div className="font-semibold">
-                  {s.date} {s.startText} — {s.endText}
-                </div>
-                {s.trial && <div className="text-xs text-accent">Пробная тренировка</div>}
-                <div className="text-sm text-gray-600">{(s.priceCents / 100).toFixed(2)} €</div>
-              </div>
-              <button className="btn-primary" onClick={() => book(s.id)}>
-                Выбрать
-              </button>
-            </li>
-          ))}
-        </ul>
-      )}
+      <section className="space-y-3">
+        <label className="block text-sm font-medium">{t("booking.dateRange")}</label>
+        <DateRange
+          start={range.start}
+          end={range.end}
+          onChange={(p) => setRange((r) => ({ ...r, ...p }))}
+          labelStart={t("booking.start")}
+          labelEnd={t("booking.end")}
+        />
+      </section>
+
+      <section className="space-y-3">
+        <label className="block text-sm font-medium">{t("booking.available")}</label>
+        <AvailableSlots
+          studioId={studioId}
+          start={range.start}
+          end={range.end}
+          onPickSlot={handlePickSlot}
+          noSlotsText={t("booking.noSlots")}
+          bookText={t("booking.book")}
+          priceLabel={t("booking.price")}
+          trialLabel={t("booking.trial")}
+        />
+      </section>
+
+      {busy && <div className="text-sm text-gray-600">{t("booking.processing")}</div>}
 
       {clientSecret && (
-        <StripeProvider clientSecret={clientSecret}>
-          <PaymentPanel onClose={closePayment} onSuccess={onPaid} />
-        </StripeProvider>
+        <PaymentSheet
+          clientSecret={clientSecret}
+          onSuccess={handlePaymentSuccess}
+          onClose={() => setClientSecret(null)}
+          title={t("payments.title")}
+          payNowText={t("payments.payNow")}
+          processingOrActionText={t("payments.processingOrAction")}
+          processingShortText={t("payments.processingShort")}
+        />
       )}
-    </section>
+    </div>
   );
 }

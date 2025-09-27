@@ -1,11 +1,11 @@
-// src/app/[locale]/auth/login/page.tsx
+//src/app/[locale]/auth/login/page.tsx
 "use client";
 
 import { useState, FormEvent } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useTranslations, useLocale } from "next-intl";
-import { login as apiLogin } from "@/lib/api/auth";
-import { useAuthStore } from "@/stores/auth";
+import { login as apiLogin } from "@/src/lib/api/auth";
+import { useAuthStore } from "@/src/stores/auth";
 
 export default function LoginPage() {
   const t = useTranslations("auth");
@@ -30,7 +30,6 @@ export default function LoginPage() {
         router.replace(returnTo);
         return;
       }
-
       router.replace(`/${locale}`);
     } catch (err: any) {
       setError(err?.message || t("errors.unknown"));
@@ -43,11 +42,11 @@ export default function LoginPage() {
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label className="block mb-1">{t("email")}</label>
-        <input
+          <input
             type="email"
+            className="w-full border px-3 py-2 rounded"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full border px-3 py-2 rounded"
             required
           />
         </div>
@@ -55,17 +54,16 @@ export default function LoginPage() {
           <label className="block mb-1">{t("password")}</label>
           <input
             type="password"
+            className="w-full border px-3 py-2 rounded"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full border px-3 py-2 rounded"
             required
           />
         </div>
         {error && <p className="text-red-500 text-sm">{error}</p>}
-        <button type="submit" className="btn-primary w-full">
-          {t("login")}
-        </button>
+        <button type="submit" className="btn-primary w-full">{t("login")}</button>
       </form>
+
       <p className="mt-4 text-center">
         {t("noAccount")}{" "}
         <a href={`/${locale}/auth/register`} className="text-accent underline">

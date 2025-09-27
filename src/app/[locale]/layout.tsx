@@ -2,6 +2,7 @@
 import type { ReactNode } from "react";
 import { NextIntlClientProvider } from "next-intl";
 import Header from "@/components/Header";
+import ToasterMount from "@/components/ToasterMount";
 import "../../styles/globals.css";
 
 export default async function LocaleLayout({
@@ -18,6 +19,7 @@ export default async function LocaleLayout({
     <NextIntlClientProvider locale={locale} messages={messages}>
       <Header />
       <main>{children}</main>
+      <ToasterMount />
     </NextIntlClientProvider>
   );
 }

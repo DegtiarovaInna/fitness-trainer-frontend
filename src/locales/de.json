@@ -1,18 +1,8 @@
 {
-  "menu": {
-    "home": "Startseite",
-    "about": "Über mich",
-    "services": "Leistungen",
-    "book": "Anmelden",
-    "blog": "Blog"
-  },
-  "cta": { "book": "Anmelden" },
+  "menu": { "home": "Startseite", "about": "Über mich", "services": "Leistungen", "book": "Buchen", "blog": "Blog" },
+  "cta": { "book": "Termin buchen" },
 
-  "home": {
-    "title": "Willkommen!",
-    "subtitle": "Die besten Online- und Offline-Workouts.",
-    "cta": "Kostenlos testen"
-  },
+  "home": { "title": "Willkommen!", "subtitle": "Die besten Online- und Offline-Workouts.", "cta": "Kostenlos testen" },
 
   "auth": {
     "login": "Anmelden",
@@ -31,14 +21,14 @@
     "submit": "Konto erstellen",
     "successTitle": "Fast fertig!",
     "successText": "Wir haben Ihnen eine Bestätigungs-E-Mail gesendet. Bitte melden Sie sich nach der Bestätigung an.",
-    "toLogin": "Weiter zur Anmeldung."
+    "toLogin": "Weiter zur Anmeldung.",
+    "confirmPassword": "Passwort wiederholen",
+    "errors": {
+      "passwordsMismatch": "Passwörter stimmen nicht überein"
+    }
   },
 
-  "about": {
-    "title": "Über mich",
-    "p1": "Ich bin zertifizierte Trainerin mit über 7 Jahren Erfahrung.",
-    "p2": "Ich arbeite online und offline. Individuelle Pläne und Betreuung."
-  },
+  "about": { "title": "Über mich", "p1": "Ich bin zertifizierte Trainerin mit über 7 Jahren Erfahrung.", "p2": "Ich arbeite online und offline. Individuelle Pläne und Betreuung." },
 
   "services": {
     "title": "Leistungen",
@@ -50,8 +40,72 @@
     "cta": "Anmelden"
   },
 
-  "blog": {
-    "title": "Blog",
-    "soon": "Artikel folgen in Kürze."
+  "blog": { "title": "Blog", "soon": "Artikel folgen in Kürze." },
+
+  "booking": {
+    "title": "Buchung",
+    "studio": "Studio",
+    "dateRange": "Zeitraum",
+    "start": "Start",
+    "end": "Ende",
+    "available": "Verfügbare Slots",
+    "noSlots": "Keine verfügbaren Slots im gewählten Zeitraum.",
+    "book": "Buchen",
+    "price": "Preis",
+    "trial": "Probe",
+    "processing": "Verarbeitung…",
+    "paymentSucceeded": "Zahlung erfolgreich"
+  },
+
+  "payments": {
+    "title": "Zahlung",
+    "payNow": "Jetzt bezahlen",
+    "processingOrAction": "Zahlung wird verarbeitet oder erfordert Bestätigung. Bitte erneut versuchen.",
+    "failed": "Zahlung konnte nicht gestartet werden",
+    "payment": "Zahlung",
+    "processingShort": "Verarbeitung..."
+  },
+
+  "profile": {
+    "title": "Profil",
+    "tabs": { "upcoming": "Bevorstehend", "history": "Historie" },
+    "upcoming": "Bevorstehend",
+    "history": "Historie",
+    "empty": "Noch leer.",
+    "cancel": "Stornieren",
+    "cancelled": "Buchung storniert",
+    "slot": "Slot",
+    "cancelConfirmTitle": "Buchung stornieren",
+    "cancelConfirmText": "Bitte Stornierung bestätigen.",
+    "editTitle": "Profil bearbeiten",
+    "save": "Speichern",
+    "saved": "Gespeichert",
+    "changePassword": "Passwort ändern",
+    "oldPassword": "Altes Passwort",
+    "newPassword": "Neues Passwort",
+    "passwordChanged": "Passwort aktualisiert"
+  },
+  "status": {
+    "PENDING": "Ausstehend",
+    "CONFIRMED": "Bestätigt",
+    "CANCELLED": "Storniert",
+    "PAYMENT_FAILED": "Zahlung fehlgeschlagen"
+  },
+  "common": {
+    "processing": "Verarbeitung…",
+    "close": "Schließen",
+    "confirm": "Bestätigen"
+  },
+  "errors": {
+    "404": {
+      "title": "Seite nicht gefunden",
+      "text": "Bitte prüfen Sie die Adresse oder gehen Sie zur Startseite zurück.",
+      "back": "Zur Startseite"
+    },
+    "500": {
+      "title": "Hoppla! Etwas ist schiefgelaufen",
+      "text": "Wir arbeiten bereits am Problem. Bitte versuchen Sie es erneut.",
+      "retry": "Erneut versuchen"
+    }
   }
 }
