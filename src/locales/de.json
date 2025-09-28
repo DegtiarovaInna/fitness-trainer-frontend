@@ -1,5 +1,5 @@
 {
-  "menu": { "home": "Startseite", "about": "Über mich", "services": "Leistungen", "book": "Buchen", "blog": "Blog" },
+  "menu": { "home": "Startseite", "about": "Über mich", "services": "Leistungen", "book": "Buchen", "blog": "Blog", "pricing": "Preise", "reviews": "Bewertungen" },
   "cta": { "book": "Termin buchen" },
 
   "home": { "title": "Willkommen!", "subtitle": "Die besten Online- und Offline-Workouts.", "cta": "Kostenlos testen" },
@@ -107,5 +107,114 @@
       "text": "Wir arbeiten bereits am Problem. Bitte versuchen Sie es erneut.",
       "retry": "Erneut versuchen"
     }
+  },
+  "pricing": {
+    "title": "Tarife & Preise",
+    "subtitle": "Wählen Sie das passende Trainingsformat.",
+    "plans": {
+      "trial":  { "title": "Schnuppern", "desc": "30 Min. Kennenlernen & Test.", "price": "€0" },
+      "single": { "title": "Einzelstunde", "desc": "60 Min. Personal Training.", "price": "€50" },
+      "pack":   { "title": "Paket x8", "desc": "8 Einheiten pro Monat.", "price": "€360" }
+    },
+    "cta": "Termin buchen",
+    "note": "Preise sind Richtwerte und können je nach Studio variieren."
+  },
+  "reviews": {
+    "title": "Kundenstimmen",
+    "subtitle": "Echte Erfahrungen nach dem Training.",
+    "items": {
+      "r1": "Tolle Energie, klare Erklärungen – Ergebnisse schon nach einem Monat!",
+      "r2": "Flexibler Zeitplan und individuelle Betreuung. Sehr zu empfehlen.",
+      "r3": "Nach Pause verletzungsfrei zurück in Form – Trainer achtet auf alles."
+    }
+  },
+  "footer": {
+    "privacy": "Datenschutz",
+    "terms": "Nutzungsbedingungen",
+    "cookies": "Cookies",
+    "imprint": "Impressum",
+    "refunds": "Storno & Erstattung",
+    "accessibility": "Barrierefreiheit",
+    "contacts": "Kontakt"
+  },
+  "cookieBanner": {
+    "text": "Wir verwenden notwendige Cookies. Analyse-Cookies nur mit Ihrer Einwilligung.",
+    "link": "Details in der Cookie-Richtlinie",
+    "accept": "Zustimmen",
+    "reject": "Ablehnen"
+  },
+  "legal": {
+    "privacy": {
+      "title": "Datenschutzerklärung",
+      "updated": "Letzte Aktualisierung: 27.09.2025",
+      "s1": {
+        "title": "1. Verantwortlicher & Kontakt",
+        "p1": "[UNTERNEHMENSNAME] (im Folgenden „wir“) verarbeitet personenbezogene Daten bei Nutzung unserer Website und bei Buchungen. GDPR-Kontakt: [EMAIL], [TELEFON]. Postanschrift: [ADRESSE]."
+      },
+      "s2": {
+        "title": "2. Verarbeitete Daten",
+        "p1": "Accountdaten (Name, E-Mail, Telefon), Buchungsdaten (Studio, Datum/Uhrzeit, Status), Zahlungs-Metadaten (Betrag, Status), technische Daten (IP, User-Agent, Cookies — nur notwendige sowie Analyse nach Einwilligung). Keine Gesundheitsdaten."
+      },
+      "s3": {
+        "title": "3. Zwecke & Rechtsgrundlagen",
+        "p1": "• Vertragserfüllung (Art. 6 Abs. 1 lit. b DSGVO): Registrierung, Buchungen, Leistungserbringung.\n• Berechtigtes Interesse (lit. f): Sicherheit, Missbrauchsvermeidung, Serviceverbesserung.\n• Einwilligung (lit. a): Analyse-/Marketing-Cookies nur nach Einwilligung.\n• Rechtliche Pflichten (lit. c): Steuer/Archivierung."
+      },
+      "s4": {
+        "title": "4. Empfänger",
+        "p1": "Zahlungsdienstleister (z. B. Stripe), Hosting/Infra, Analyse (nur mit Einwilligung). Übermittlungen in Drittländer erfolgen auf Basis geeigneter Garantien (z. B. EU-Standardvertragsklauseln)."
+      },
+      "s5": {
+        "title": "5. Speicherdauer",
+        "p1": "Account & Buchungshistorie bis zur Löschung und bis zu 3 Jahre danach. Zahlungsunterlagen gem. steuerlicher Aufbewahrungspflichten (i. d. R. 10 Jahre in DE). Cookies gemäß Zweck/Lebensdauer."
+      },
+      "s6": {
+        "title": "6. Betroffenenrechte",
+        "p1": "Auskunft, Berichtigung, Löschung, Einschränkung, Datenübertragbarkeit, Widerspruch, Widerruf. Beschwerden an die zuständige Aufsichtsbehörde: [AUFSICHTSBEHÖRDE/LINK]."
+      },
+      "s7": {
+        "title": "7. Cookies/Analyse",
+        "p1": "Notwendige Cookies (TTDSG) sind für den Betrieb erforderlich. Analyse-Cookies werden erst nach Einwilligung gesetzt. Details siehe Cookie-Richtlinie."
+      }
+    },
+    "terms": {
+      "title": "Nutzungsbedingungen",
+      "s1": { "title": "1. Leistungen", "p1": "Wir bieten Personal-Training (online/offline) und eine Terminbuchung über die Website an." },
+      "s2": { "title": "2. Konto", "p1": "Sie geben korrekte Daten an und schützen Ihr Passwort. Bei Verstößen/Sicherheitsrisiken kann der Zugang beschränkt werden." },
+      "s3": { "title": "3. Buchung & Zahlung", "p1": "Preise werden vor Bestätigung angezeigt. Zahlungen über Zahlungsdienstleister (z. B. Stripe). Vertragsschluss nach Buchungsbestätigung und erfolgreicher Zahlung (falls erforderlich)." },
+      "s4": { "title": "4. Stornierung/Erstattung", "p1": "Regeln siehe Storno-/Erstattungsrichtlinie; sie ist Bestandteil dieser Bedingungen." },
+      "s5": { "title": "5. Gesundheit/Haftung", "p1": "Sie stellen sicher, dass Sie trainingsfähig sind. Haftungsausschluss für Schäden bei Missachtung von Hinweisen, außer bei Vorsatz/grober Fahrlässigkeit unsererseits." },
+      "s6": { "title": "6. Recht & Gerichtsstand", "p1": "Es gilt deutsches Recht. Gerichtsstand nach Sitz des Anbieters (verbraucherschützende Regelungen bleiben unberührt)." }
+    },
+    "cookies": {
+      "title": "Cookie-Richtlinie",
+      "s1": { "title": "Arten", "li1": "Notwendige — Betrieb, Sicherheit, Sprache (ohne Einwilligung).", "li2": "Analyse — nur nach Einwilligung über den Banner." },
+      "s2": { "title": "Verwaltung", "p1": "Einwilligung im Banner erteilen/widerrufen oder im Browser verwalten. Ablehnung deaktiviert Analyse." }
+    },
+    "imprint": {
+      "title": "Impressum",
+      "company": "Unternehmen: [UNTERNEHMENSNAME]",
+      "address": "Adresse: [ADRESSE]",
+      "contact": "Kontakt: [EMAIL], [TELEFON]",
+      "representative": "Vertretungsberechtigt: [NAME]",
+      "register": "Register/Nummer: [REGISTER/NR.]",
+      "vat": "USt-IdNr.: [VAT-NR.]",
+      "odr": "EU-Streitbeilegungsplattform: https://ec.europa.eu/consumers/odr",
+      "liabilityTitle": "Haftung für Inhalte/Links",
+      "liabilityText": "Trotz sorgfältiger Kontrolle keine Haftung für externe Links; für deren Inhalte sind deren Betreiber verantwortlich."
+    },
+    "refunds": {
+      "title": "Storno & Erstattung",
+      "r1": "Storno ≥ 24 Std. vorher — 100% Erstattung.",
+      "r2": "Storno < 24 Std. — 50% Erstattung.",
+      "r3": "Nichterscheinen — keine Erstattung.",
+      "note": "Rückzahlung auf die ursprüngliche Zahlungsmethode (Stripe) innerhalb einer angemessenen Frist."
+    },
+    "accessibility": {
+      "title": "Barrierefreiheit",
+      "p1": "Wir arbeiten an der Einhaltung von WCAG 2.1 AA.",
+      "p2": "Melden Sie Barrieren an [EMAIL]; wir helfen gerne."
+    }
   }
 }
+
+

@@ -32,6 +32,8 @@ export default function Header() {
     { key: "menu.home", href: `${L}` },
     { key: "menu.about", href: `${L}/about` },
     { key: "menu.services", href: `${L}/services` },
+    { key: "menu.pricing", href: `${L}/pricing` },
+    { key: "menu.reviews", href: `${L}/reviews` },
     { key: "menu.book", href: `${L}/book` },
     { key: "menu.blog", href: `${L}/blog` },
   ];

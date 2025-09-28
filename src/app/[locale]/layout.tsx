@@ -1,9 +1,13 @@
+
 // src/app/[locale]/layout.tsx
 import type { ReactNode } from "react";
 import { NextIntlClientProvider } from "next-intl";
-import Header from "@/components/Header";
-import ToasterMount from "@/components/ToasterMount";
-import "../../styles/globals.css";
+import Header from "@/src/components/Header";
+import Footer from "@/src/components/Footer";
+import ToasterMount from "@/src/components/ToasterMount";
+ import CookieBanner from "@/src/components/CookieBanner";
+
+import "@/src/styles/globals.css";
 
 export default async function LocaleLayout({
   children,
@@ -13,13 +17,16 @@ export default async function LocaleLayout({
   params: Promise<{ locale: "ru" | "uk" | "de" }>;
 }) {
   const { locale } = await params;
-  const messages = (await import(`@/locales/${locale}.json`)).default;
+
+  const messages = (await import(`@/src/locales/${locale}.json`)).default;
 
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
       <Header />
-      <main>{children}</main>
+      <main className="min-h-[70vh]">{children}</main>
+      <Footer />
       <ToasterMount />
+      {/* <CookieBanner /> */}
     </NextIntlClientProvider>
   );
 }
